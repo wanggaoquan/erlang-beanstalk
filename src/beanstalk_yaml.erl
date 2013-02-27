@@ -43,6 +43,3 @@ parse_test_() -> [
     ?_assertEqual(["one", "two"], parse(<<"---\n- one\n- two\n">>))
   , ?_assertEqual([{"one", "1"}, {"two", "2"}], parse(<<"---\none: 1\ntwo: 2\n">>))
   ].
-
-failing_test() ->
-  ?assert(false).
