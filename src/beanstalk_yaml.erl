@@ -1,12 +1,8 @@
 -module(beanstalk_yaml).
 
--export([parse/1, test/0]).
+-export([parse/1]).
 
-
-test() ->
-  ["one", "two"] = parse(<<"---\n- one\n- two\n">>),
-  [{"one", "1"}, {"two", "2"}] = parse(<<"---\none: 1\ntwo: 2\n">>),
-  {"hello", <<"world">>} = binary_break_at($\n, <<"hello\nworld">>).
+-include_lib("eunit/include/eunit.hrl").
 
 parse(<<"---\n", Data/bytes>>) ->
   case Data of
@@ -42,3 +38,11 @@ binary_break_at(C, Data, Prefix) when is_binary(Data) ->
     _ ->
       binary_break_at(C, T, [H | Prefix])
   end.
+
+parse_test_() -> [
+    ?_assertEqual(["one", "two"], parse(<<"---\n- one\n- two\n">>))
+  , ?_assertEqual([{"one", "1"}, {"two", "2"}], parse(<<"---\none: 1\ntwo: 2\n">>))
+  ].
+
+failing_test() ->
+  ?assert(false).

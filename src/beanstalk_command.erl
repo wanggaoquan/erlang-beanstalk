@@ -1,12 +1,8 @@
 -module(beanstalk_command).
 
--export([test/0, send/2, send/3, to_binary/1]).
+-export([send/2, send/3, to_binary/1]).
 
-
-test() ->
-  <<"reserve\r\n">> = to_binary({reserve}),
-  <<"use foo\r\n">> = to_binary({use, "foo"}),
-  ok.
+-include_lib("eunit/include/eunit.hrl").
 
 send(Socket, Command) ->
   gen_tcp:send(Socket, to_binary(Command)).
@@ -34,3 +30,8 @@ to_string(Term) when is_atom(Term) ->
   atom_to_list(Term);
 to_string(Term) when is_list(Term) ->
   Term.
+
+to_binary_test_() -> [
+    ?_assertEqual(<<"reserve\r\n">>, to_binary({reserve}))
+  , ?_assertEqual(<<"use foo\r\n">>, to_binary({use, "foo"}))
+  ].
