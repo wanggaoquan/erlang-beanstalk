@@ -1,12 +1,10 @@
-erlang-beanstalk
-================
+# erlang-beanstalk
 
 
 An Erlang client for [beanstalkd](http://kr.github.com/beanstalkd/).
 
 
-Quick start
------------
+## Quick start
 
     $ make
     ...
@@ -22,3 +20,7 @@ Quick start
     ...
     5> ok = beanstalk:close(Q).
     ...
+
+## License
+
+This project is licensed under the terms of the [MIT license](https://opensource.org/licenses/MIT).
